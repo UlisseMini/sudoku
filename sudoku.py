@@ -88,14 +88,19 @@ class Grid:
 
         return s
 
-if __name__ == '__main__':
+
+def from_str(s: str) -> Grid:
     grid = Grid()
 
-    grid.grid[0][1] = 2
-    # grid.grid[0][1] = 1
+    for i in range(len(s)):
+        grid.grid[i // 9][i % 9] = int(s[i])
 
-    grid.grid[5][1] = 2
-    # grid.grid[0][6] = 2
+    return grid
+
+
+if __name__ == '__main__':
+    s = "004300209005009001070060043006002087190007400050083000600000105003508690042910300"
+    grid = from_str(s)
+    # grid = Grid()
 
     print(grid)
-    assert grid.legal() == False
