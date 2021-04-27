@@ -42,6 +42,7 @@ class Grid:
         return self.grid
 
 
+
     def cols(self):
         xs = []
         for j in range(self.n):
@@ -76,6 +77,20 @@ class Grid:
 
         return True
 
+    def solved(self):
+        if not self.legal():
+            return False
+
+        for row in self.grid:
+            for item in row:
+                if item == 0:
+                    return False
+
+        return True
+
+    def __getitem__(self, k):
+        return self.grid[k]
+
 
     def __str__(self):
         "String for an (n by n) grid"
@@ -97,10 +112,18 @@ def from_str(s: str) -> Grid:
 
     return grid
 
+def to_str(grid: Grid) -> str:
+    s = ''
+    for i in range(81):
+        s += str(grid[i // 9][i % 9])
+    return s
+
 
 if __name__ == '__main__':
     s = "004300209005009001070060043006002087190007400050083000600000105003508690042910300"
     grid = from_str(s)
     # grid = Grid()
+
+    assert to_str(grid) == s
 
     print(grid)
